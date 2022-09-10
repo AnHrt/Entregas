@@ -1,4 +1,4 @@
-# Retroalimentación primera entrega
+# Retroalimentación de entregas
 **Entregas individuales del primer modulo de la concentración en IA**
 > María de los Angeles Arista Huerta
 
