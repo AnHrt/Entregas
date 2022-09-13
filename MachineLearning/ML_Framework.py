@@ -1,14 +1,8 @@
 # Maria de los Angeles Arista Huerta - A01369984
 
 """
-With this dataset I want to predict the cut of diamonds 
-with respect to their length, width and their depth.
-Possible cuts:
-            - Ideal
-            - Premium
-            - Very good
-            - Good
-            - Fair
+With this dataset I want to predict the caratage of diamonds 
+with respect to their price, length, width and their depth.
 
 About the dataset:
     There are 53,940 diamonds in the dataset with 10 features 
@@ -21,18 +15,31 @@ About the dataset:
                                                 y: width in mm
                                                 z: depth in mm """
 
-#~~~~~~~~~~~~~~~~~~~~~~ LIBRARIES ~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~ LIBRARIES ~~~~~~~~~~~~~~~~~~~~~~
+import numpy as np
 import pandas as pd
 
-#~~~~~~~~~~~~~~~~~~~~~~ FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~
 
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 
-#~~~~~~~~~~~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~~~~~~~~~~~
 data = pd.read_csv('c:\\Users\\angix\\Downloads\\MachineLearning\\Diamonds_Prices2022.csv')
-data = data.drop(columns=['Unnamed: 0'], axis=1) #Delete the default index in the dataset
-#Reduce the dataframe to 530 values, the dataframe countaining 53944 samples
-#Use the ten percent data of dataset to train the model
-data = data.iloc[:530]
+#data = data.drop(columns=['Unnamed: 0','cut','clarity','color'], axis=1) #Delete the default index in the dataset
+#Reduce the dataframe to 500 values, the dataframe countaining 53944 samples
+data = data.iloc[:500]
 
-#print(data)
-print(data['cut'].value_counts()) #posibles cortes 
+
+x = data.drop(['Unnamed: 0','cut','clarity','color'], axis=1)
+y = data['carat']
+
+Xtrain, Xtest, ytrain, ytest = train_test_split(x, y,
+                                                random_state=1)
+model = LinearRegression()
+model.fit(Xtrain, ytrain)
+print('\nparameter value: ',model.coef_) 
+print('\nbias value:      ',model.intercept_) 
+
+ypred = model.predict(Xtest)
+
+print('\n',model.score(x,y))
