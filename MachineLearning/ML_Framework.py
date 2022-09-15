@@ -19,24 +19,24 @@ About the dataset:
 import numpy as np
 import pandas as pd
 
-
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 # ~~~~~~~~~~~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~~~~~~~~~~~
 data = pd.read_csv('c:\\Users\\angix\\Downloads\\MachineLearning\\Diamonds_Prices2022.csv')
-#data = data.drop(columns=['Unnamed: 0','cut','clarity','color'], axis=1) #Delete the default index in the dataset
+data = data.drop(['Unnamed: 0'], axis=1) #Delete the default index in the dataset
 #Reduce the dataframe to 500 values, the dataframe countaining 53944 samples
 data = data.iloc[:500]
 
 
-x = data.drop(['Unnamed: 0','cut','clarity','color'], axis=1)
+x = data[['price','x','y','z']]
 y = data['carat']
 
-Xtrain, Xtest, ytrain, ytest = train_test_split(x, y,
-                                                random_state=1)
+Xtrain, Xtest, ytrain, ytest = train_test_split(x, y)
+
 model = LinearRegression()
 model.fit(Xtrain, ytrain)
+
 print('\nparameter value: ',model.coef_) 
 print('\nbias value:      ',model.intercept_) 
 
