@@ -1,5 +1,5 @@
 # Retroalimentación de entregas
-**Entregas individuales del primer modulo de la concentración en IA**
+**Entregas del primer bloque de la concentración en IA. Modulo 2 - Machine Learning**
 > María de los Angeles Arista Huerta
 
 La carpeta *MachineLEarning* contiene las entrega del módulo dos: 
